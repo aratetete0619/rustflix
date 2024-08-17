@@ -1,0 +1,13 @@
+FROM rust:1.80.1
+
+WORKDIR /usr/src/rustflix
+
+RUN mkdir src && \
+  echo "fn main() {println!(\"if you see this, the build broke\")}" > src/main.rs
+
+COPY . .
+
+RUN touch src/main.rs && \
+  cargo build --release
+
+CMD ["cargo", "run", "--release"]
